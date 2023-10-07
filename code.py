@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn import preprocessing
 
-estr_tenors = [1,2,3,4,5,6,7,8,9,10,11,12,15,20,30,40,50]
+yield_curve_date = [1,2,3,4,5,6,7,8,9,10,11,12,15,20,30,40,50]
 
 data = pd.read_csv('data.csv')
 data.columns = ['date','1Y','2Y','3Y','4Y','5Y','6Y','7Y','8Y','9Y','10Y','11Y','12Y','15Y','20Y','30Y','40Y','50Y']
@@ -20,7 +20,6 @@ df_estr = df_estr[:-1]
 
 combined_data = df_estr.copy(deep=True)
 
-#ESTR swap rates plot
 
 fig = px.line(df_estr,title = 'Swap Rates',
               width=1000,
@@ -30,12 +29,9 @@ fig = px.line(df_estr,title = 'Swap Rates',
 df = df_estr.copy(deep=True) #creating a dataframe copy of the swap rates
 returns = (df - df.shift(1))*100 # calculating the daily change (in bps)
 
-# Removing and replacing erratic values (if any)
+
 returns.replace([np.inf, -np.inf], np.nan, inplace=True)
 returns = returns.dropna(axis=0)
-
-# Quick look at the new dataframe
-returns
 
 fig = px.line(returns,
               title = 'Swap Rates Change (in bps)',
