@@ -23,7 +23,7 @@ combined_data = df_estr.copy(deep=True)
 
 
 df = df_estr.copy(deep=True) 
-returns = (df - df.shift(1))*100 # calculating the daily change (in bps)
+returns = (df - df.shift(1))*100 
 
 
 returns.replace([np.inf, -np.inf], np.nan, inplace=True)
@@ -56,7 +56,7 @@ pca_df = pd.DataFrame(pcas,columns=['PC1','PC2','PC3'], index=tas.index)
 tas = tas.join(pca_df)
 pca_df
 
-expected_change = np.dot(pca_df,rands.T) #we use the transpose matrix rand.T to enable matrix multiplication
+expected_change = np.dot(pca_df,rands.T) 
 expected_changes = pd.DataFrame(expected_change,index = pca_df.index, columns=returns.columns)
 expected_changes
 df_residuals = returns - expected_changes
