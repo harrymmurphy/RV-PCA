@@ -41,7 +41,7 @@ fig = px.line(returns,
 fig.show()
      cov_matrix = returns.cov()
 
-# PCA (fit & transform)
+
 
 pca = PCA()
 pca.fit_transform(cov_matrix)
